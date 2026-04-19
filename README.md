@@ -1,2 +1,2 @@
-# FlutterMind
-Plataforma Educacional Tecnológica
+# MeuPomo
+Ferramenta de Produtividade e Organização
