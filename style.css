@@ -40,3 +40,52 @@
     --primary-descanso: #72EBF4;
     --surface-descanso: #D0F8FB;
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--black);
+    font-family: 'Clash Display', sans-serif;
+    letter-spacing: 0%;
+}
+
+/* Text styles */
+.texto-timer {
+    font-weight: bold;
+    font-size: 120px;
+    line-height: 140px;
+}
+
+.texto-title {
+    font-weight: semibold;
+    font-size: 30px;
+    line-height: 36px;
+}
+
+.texto-subtitle {
+    font-weight: semibold;
+    font-size: 24px;
+    line-height: 32px;
+}
+
+.texto-small {
+    font-weight: semibold;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.texto-text {
+    font-weight: medium;
+    font-size: 16px;
+    line-height: 150%;
+}
+
+.texto-button {
+    font-weight: semibold;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+/* Estilos do projeto desktop-first */
+
