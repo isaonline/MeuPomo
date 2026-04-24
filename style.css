@@ -259,3 +259,7 @@ aside {
     padding: 24px;
     box-shadow: -2px 4px 0px 0px var(--black);
 }
+
+#tasks-list {
+    width: 534px;
+}
