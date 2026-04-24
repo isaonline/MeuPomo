@@ -251,6 +251,9 @@ div > button > img {
 /* Card de tasks */
 
 aside {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 16px;
     background-color: var(--surface-foco);
     border: 4px solid var(--black);
     border-radius: 10px;
@@ -261,5 +264,41 @@ aside {
 }
 
 #tasks-list {
+    height: calc(3 * 80px);
     width: 534px;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 15px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#tasks-list::-webkit-scrollbar {
+    background-color: var(--white);
+    border-radius: 30px;
+    border: 2px solid var(--black);
+}
+
+#task-list::-webkit-scrollbar-thumb {
+    color: var(--black);
+}
+
+.task {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--white);
+    width: 510px;
+    height: 68px;
+    border-radius: 8px;
+    padding: 16px 15px;
+    border: 2px solid var(--black);
+}
+
+.check-task {
+    border: 1px solid var(--black);
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
 }
