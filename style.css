@@ -273,16 +273,6 @@ aside {
     overflow-y: scroll;
 }
 
-#tasks-list::-webkit-scrollbar {
-    background-color: var(--white);
-    border-radius: 30px;
-    border: 2px solid var(--black);
-}
-
-#task-list::-webkit-scrollbar-thumb {
-    color: var(--black);
-}
-
 .task {
     display: flex;
     justify-content: flex-start;
@@ -301,4 +291,13 @@ aside {
     width: 35px;
     height: 35px;
     border-radius: 8px;
+}
+
+.task > img {
+    width: 36px;
+    border: 2px solid var(--black);
+    box-shadow: 2px 1px 0px 0px var(--black);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 2px 1px 0px 0px var(--black);
 }
