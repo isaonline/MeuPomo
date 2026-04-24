@@ -11,24 +11,25 @@
         <section>
             <h1 id="logo">Meu<strong>Pomo</strong></h1>
             <nav id="tab">
-                <button>Foco</button>
-                <button>Pausa</button>
-                <button>Descanso</button>
+                <button id="foco" class="texto-subtitle active-tab-foco">Foco</button>
+                <button id="pausa" class="texto-subtitle">Pausa</button>
+                <button id="descanso" class="texto-subtitle">Descanso</button>
             </nav>
-            <div class="timer"><p>12:30</p></div>
-            <div class="buttons">
-                <button><img src="icons/arrow-clockwise-fill.svg" alt="Resetar tempo"></button>
-                <button><img src="icons/play-fill.svg" alt="Começar o timer"></button>
-                <button><img src="icons/fast-forward-fill.svg" alt="Passar para o próximo timer"></button>
+            <div class="timer texto-timer"><p>12:30</p></div>
+            <div id="buttons">
+                <button id="button-reset"><img src="icons/arrow-clockwise-fill.svg" alt="Resetar tempo"></button>
+                <button id="button-play"><img src="icons/play-fill.svg" alt="Começar o timer"></button>
+                <button id="button-forward"><img src="icons/fast-forward-fill.svg" alt="Passar para o próximo timer"></button>
             </div>
-            <div class="div-musica">
+            <div id="div-musica">
                 <img src="icons/music-note-fill.svg" alt="Nota músical">
-                <label for="musica">Ativar Música</label>
-                <input type="radio" name="musica" id="musica">
+                <label for="button-musica" class="texto-small label-button-musica">Ativar Música
+                <button name="button-musica" class="button-musica"><span class="span-musica"></span></button>
+                </label>
             </div>
         </section>
         <aside id="card-task">
-            <h2>Minhas tasks</h2>
+            <h2 class="texto-subtitle">Minhas tasks</h2>
         </aside>
     </main>
 </body>

@@ -1,21 +1,21 @@
 @font-face {
     font-family: 'Clash Display';
     src: url('font/ClashDisplay-Medium.otf') format('opentype');
-    font-weight: medium;
+    font-weight: 500;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Clash Display';
     src: url('font/ClashDisplay-Semibold.otf') format('opentype');
-    font-weight: semibold;
+    font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Clash Display';
     src: url('font/ClashDisplay-Bold.otf') format('opentype');
-    font-weight: bold;
+    font-weight: 700;
     font-style: normal;
 }
 
@@ -52,37 +52,37 @@
 
 /* Text styles */
 .texto-timer {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 120px;
     line-height: 140px;
 }
 
 .texto-title {
-    font-weight: semibold;
+    font-weight: 600;
     font-size: 30px;
     line-height: 36px;
 }
 
 .texto-subtitle {
-    font-weight: semibold;
+    font-weight: 600;
     font-size: 24px;
     line-height: 32px;
 }
 
 .texto-small {
-    font-weight: semibold;
+    font-weight: 600;
     font-size: 20px;
     line-height: 24px;
 }
 
 .texto-text {
-    font-weight: medium;
+    font-weight: 500;
     font-size: 16px;
     line-height: 150%;
 }
 
 .texto-button {
-    font-weight: semibold;
+    font-weight: 600;
     font-size: 16px;
     line-height: 24px;
 }
@@ -104,8 +104,9 @@ section {
     gap: 36px;
 }
 
+/* Logo MeuPomo */
 #logo {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 50px;
     line-height: 100%;
     text-align: center;
@@ -113,7 +114,7 @@ section {
 }
 
 #logo > strong {
-    font-weight: bold;
+    font-weight: 700;
     font-size: 50px;
     line-height: 100%;
     text-align: center;
@@ -121,11 +122,13 @@ section {
     color: var(--primary-foco);
 }
 
+/* Menu de modos entre timers */
+
 #tab {
     display: flex;
     box-shadow: -2px 4px 0px 0px var(--black);
-    border: 3px solid var(--black);
     border-radius: 40px;
+    border: 3px solid var(--black);
 }
 
 nav > button {
@@ -133,7 +136,119 @@ nav > button {
     height: 44px;
     background-color: transparent;
     padding: 6px 16px;
+    border: none;
 }
+
+#foco {
+    border-right: 3px solid var(--black);
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+#descanso {
+    border-left: 3px solid var(--black);
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+/* Modos ativos de cada tab */
+
+.active-tab-foco {
+    background-color: var(--primary-foco);
+}
+
+.active-tab-pausa {
+    background-color: var(--primary-pausa);
+}
+
+.active-tab-descanso {
+    background-color: var(--primary-descanso);
+}
+
+/* Botões de Ação do Timer */
+
+#buttons {
+    display: flex;
+    width: 337;
+    height: 96;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+}
+
+#button-reset, #button-forward {
+    width: 80;
+    height: 80;
+    border-radius: 16px;
+    background-color: var(--surface-foco);
+    border: 2px solid var(--black, #2C2C2C);
+    box-shadow: -2px 4px 0px 0px var(--black);
+    padding: 24px;
+}
+
+#button-play {
+    width: 113px;
+    height: 96px;
+    border-radius: 16px;
+    padding: 4px;
+    background-color: var(--primary-foco);
+    border: 2px solid var(--black, #2C2C2C);
+    box-shadow: -2px 4px 0px 0px var(--black);
+}
+
+div > button > img {
+    width: auto;
+    height: 32px;
+}
+
+/* Icone, Texto e Radio para Ativar Música */
+
+#div-musica {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+#div-musica > img {
+    height: 32px;
+}
+
+.label-button-musica {
+    transform: translate(0, -2px);    
+}
+
+.button-musica {
+    margin-left: 16px;
+    width: 52px;
+    height: 26px;
+    border-radius: 30px;
+    border: 1px solid var(--black);
+    background: var(--white);
+    box-shadow: 2px 1px 0px 0px var(--black);
+    transform: translate(0, 5px);
+}
+
+.span-musica {
+    width: 20px;
+    height: 20px;
+    background-color: var(--black);
+    transform: translate(-20px, -10px);
+    border-radius: 100%;
+    position: absolute;
+}
+
+/* Botão de música ativo */
+
+.button-musica-active {
+    background: var(--primary-foco);    
+}
+
+.span-active {
+    transform: translate(-0px, -10px);    
+}
+
+/* Card de tasks */
 
 aside {
     background-color: var(--surface-foco);
