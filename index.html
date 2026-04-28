@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MeuPomo</title>
     <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-<body>
+<body class="modo-foco">
     <main>
         <section>
             <h1 id="logo">Meu<strong>Pomo</strong></h1>
             <nav id="tab">
-                <button id="foco" class="texto-subtitle active-tab-foco">Foco</button>
+                <button id="foco" class="texto-subtitle active-tab">Foco</button>
                 <button id="pausa" class="texto-subtitle">Pausa</button>
                 <button id="descanso" class="texto-subtitle">Descanso</button>
             </nav>
-            <div class="timer texto-timer"><p>12:30</p></div>
+            <div id="timer" class="texto-timer">25:00</div>
             <div id="buttons">
                 <button id="button-reset"><img src="icons/arrow-clockwise-fill.svg" alt="Resetar tempo"></button>
-                <button id="button-play"><img src="icons/play-fill.svg" alt="Começar o timer"></button>
+                <button id="button-play"><img src="icons/play-fill.svg" alt="Começar o timer" id="img-botao-play"></button>
                 <button id="button-forward"><img src="icons/fast-forward-fill.svg" alt="Passar para o próximo timer"></button>
             </div>
             <div id="div-musica">
