@@ -37,17 +37,17 @@
                 <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
                 <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
             </div>
-            <form>
+            <form id="task-form">
                 <fieldset>
-                    <label for="task-input" class="task-label">Nova task</label>
+                    <label for="task-input" class="task-label texto-small">Nova task</label>
                     <input type="text" name="task-input" id="task-input">
+                    <div id="buttons-input"><button id="button-excluir" class="texto-button">Excluir</button>
+                    <button id="button-cancelar" class="texto-button">Cancelar</button>
+                    <button id="button-salvar" class="texto-button">Salvar</button></div>
                 </fieldset>
-                <button id="button-excluir">Excluir</button>
-                <button id="button-cancelar">Cancelar</button>
-                <button id="button-salvar">Salvar</button>
             </form>
-            <button id="button-adicionar-task">
-                <div><img src="icons/plus.svg" alt="Ícone de Adicionar task"></div>
+            <button id="button-adicionar-task" class="texto-text">
+                <span><img src="icons/plus.svg" alt="Ícone de Adicionar task"></span>
                 Adicionar task
             </button>
         </aside>
