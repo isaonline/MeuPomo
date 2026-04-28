@@ -10,6 +10,13 @@ let contagem
 const buttonReset = document.getElementById('button-reset')
 const buttonPlay = document.getElementById('button-play')
 const imgButtonPlay = document.getElementById('img-botao-play')
+const buttonPassarModo = document.getElementById('button-forward')
+const musicaFundo = new Audio('sounds/Transcendence.mp3')
+const somClick = new Audio('sounds/Click.mp3')
+let musicaTocando = false
+const buttonMusica = document.getElementById('buttonmusica')
+const spanMusica = document.getElementById('spanmusica')
+const labelMusica = document.getElementById('label-musica')
 
 function removerOutrosModos() {
     htmlBody.classList.remove('modo-foco', 'modo-pausa', 'modo-descanso')
@@ -54,37 +61,54 @@ function resetarTimer(tempoAtual) {
     timerFuncionando = false
     minutosEmSegundos = tempoAtual
     atualizarDisplay()
+    imgButtonPlay.setAttribute('src', 'icons/play-fill.svg') 
 }
 
-
-buttonFoco.addEventListener('click', () => {
+function trocarModo(modo) {
     removerOutrosModos()
-    htmlBody.classList.add('modo-foco')
-    buttonFoco.classList.add('active-tab')
-    minutosEmSegundos = 1500
-    timer.textContent = "25:00"
+    htmlBody.classList.add(`modo-${modo}`)
+    if (modo == 'pausa') {
+        buttonPausa.classList.add('active-tab')
+        timer.textContent = "05:00"
+        minutosEmSegundos = 300
+    } else if (modo == 'foco') {
+        buttonFoco.classList.add('active-tab')
+        minutosEmSegundos = 1500
+        timer.textContent = "25:00"
+    } else {
+        buttonDescanso.classList.add('active-tab')
+        minutosEmSegundos = 900
+        timer.textContent = "15:00"
+    }
     resetarTimer(minutosEmSegundos)
     imgButtonPlay.setAttribute('src', 'icons/play-fill.svg')
+}
+
+function tocarMusica() {
+    somClick.play()
+    if (!musicaTocando) {
+        musicaFundo.play()
+        buttonMusica.classList.add('button-musica-active')
+        spanMusica.classList.add('span-active')
+        musicaTocando = true
+    } else {
+        musicaFundo.pause()
+        buttonMusica.classList.remove('button-musica-active')
+        spanMusica.classList.remove('span-active')
+        musicaTocando = false
+    }
+}
+
+buttonFoco.addEventListener('click', () => {
+    trocarModo('foco')
 })
 
 buttonPausa.addEventListener('click', () => {
-    removerOutrosModos()
-    htmlBody.classList.add('modo-pausa')
-    buttonPausa.classList.add('active-tab')
-    minutosEmSegundos = 300
-    timer.textContent = "05:00"
-    resetarTimer(minutosEmSegundos)
-    imgButtonPlay.setAttribute('src', 'icons/play-fill.svg')
+    trocarModo('pausa')
 })
 
 buttonDescanso.addEventListener('click', () => {
-    removerOutrosModos()
-    htmlBody.classList.add('modo-descanso')
-    buttonDescanso.classList.add('active-tab')
-    minutosEmSegundos = 900
-    timer.textContent = "15:00"
-    resetarTimer(minutosEmSegundos)
-    imgButtonPlay.setAttribute('src', 'icons/play-fill.svg')
+    trocarModo('descanso')
 })
 
 buttonPlay.addEventListener('click', () => {
@@ -98,6 +122,25 @@ buttonPlay.addEventListener('click', () => {
 })
 
 buttonReset.addEventListener('click', () => {
-    resetarTimer(minutosEmSegundos)
-    imgButtonPlay.setAttribute('src', 'icons/play-fill.svg')    
+    if (htmlBody.classList.contains('modo-foco')) {
+        resetarTimer(1500)
+    } else if (htmlBody.classList.contains('modo-pausa')) {
+        resetarTimer(300)
+    } else {
+        resetarTimer(900)
+    }   
+})
+
+buttonPassarModo.addEventListener('click', () => {
+    if (htmlBody.classList.contains('modo-foco')) {
+        trocarModo('pausa')
+    } else if (htmlBody.classList.contains('modo-pausa')) {
+        trocarModo('descanso')
+    } else {
+        trocarModo('foco')
+    }       
+})
+
+labelMusica.addEventListener('click', () => {
+    tocarMusica()
 })
