@@ -19,6 +19,9 @@ let musicaTocando = false
 const buttonMusica = document.getElementById('buttonmusica')
 const spanMusica = document.getElementById('spanmusica')
 const labelMusica = document.getElementById('label-musica')
+const illustEmptyState = document.getElementById('illust-tasks-vazias')
+const buttonAddTask = document.getElementById('button-adicionar-task')
+const formTask = document.getElementById('task-form')
 
 function removerOutrosModos() {
     htmlBody.classList.remove('modo-foco', 'modo-pausa', 'modo-descanso')
@@ -70,6 +73,7 @@ function resetarTimer(tempoAtual) {
 }
 
 function trocarModo(modo) {
+    somClick.play()
     removerOutrosModos()
     htmlBody.classList.add(`modo-${modo}`)
     if (modo == 'pausa') {
@@ -120,6 +124,7 @@ buttonDescanso.addEventListener('click', () => {
 })
 
 buttonPlay.addEventListener('click', () => {
+    somClick.play()
     if (!timerFuncionando) {
         começarTimer(minutosEmSegundos)
         imgButtonPlay.setAttribute('src', 'icons/pause-fill.svg')
@@ -130,6 +135,7 @@ buttonPlay.addEventListener('click', () => {
 })
 
 buttonReset.addEventListener('click', () => {
+    somClick.play()
     if (htmlBody.classList.contains('modo-foco')) {
         resetarTimer(1500)
     } else if (htmlBody.classList.contains('modo-pausa')) {
@@ -140,6 +146,7 @@ buttonReset.addEventListener('click', () => {
 })
 
 buttonPassarModo.addEventListener('click', () => {
+    somClick.play()
     if (htmlBody.classList.contains('modo-foco')) {
         trocarModo('pausa')
     } else if (htmlBody.classList.contains('modo-pausa')) {
@@ -151,4 +158,9 @@ buttonPassarModo.addEventListener('click', () => {
 
 labelMusica.addEventListener('click', () => {
     tocarMusica()
+})
+
+buttonAddTask.addEventListener('click', () => {
+    illustEmptyState.classList.add('hidden')
+    formTask.classList.remove('hidden')
 })

@@ -31,20 +31,20 @@
         </section>
         <aside id="card-task">
             <h2 class="texto-subtitle">Minhas tasks</h2>
-            <div id="tasks-list">
-                <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
-                <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
-                <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
-                <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
-                <div class="task"><span class="check-task"></span><h4 class="texto-text">Digite sua task e aperte "Enter"!</h4><img src="icons/pencil.svg" alt="Editar task"></div>
+            <div id="tasks-list task-list-vazia" class="hidden">
             </div>
-            <form id="task-form">
+            <div id="illust-tasks-vazias">
+                <img src="icons/cat.svg" alt="Sem tasks">
+                <h3 class="texto-subtitle">Opa!</h3>
+                <p class="texto-text">Parece que não tem nenhuma task aqui... <br>Clique no botão abaixo para criar uma task!</p>
+            </div>
+            <form id="task-form" class="hidden">
                 <fieldset>
                     <label for="task-input" class="task-label texto-small">Nova task</label>
                     <textarea name="task-input" id="task-input" placeholder="Escreva a  task aqui..."></textarea>
-                    <div id="buttons-input"><button id="button-excluir" class="texto-button">Excluir</button>
-                    <button id="button-cancelar" class="texto-button">Cancelar</button>
-                    <button id="button-salvar" class="texto-button">Salvar</button></div>
+                    <div id="buttons-input"><button id="button-excluir" class="texto-button hidden">Excluir</button>
+                    <button id="button-cancelar" class="texto-button" type="reset">Cancelar</button>
+                    <button id="button-salvar" class="texto-button" type="submit">Salvar</button></div>
                 </fieldset>
             </form>
             <button id="button-adicionar-task" class="texto-text">
