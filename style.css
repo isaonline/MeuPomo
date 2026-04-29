@@ -276,11 +276,11 @@ aside {
     gap: 15px;
 }
 
-#task-list-vazia {
+.task-list-vazia {
     margin-top: -16px;
 }
 
-#task-list-longa {
+.task-list-longa {
     overflow-x: hidden;
     overflow-y: scroll;
     height: calc(3 * 80px);
