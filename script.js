@@ -5,6 +5,7 @@ const buttonDescanso = document.getElementById('descanso')
 const htmlBody = document.body
 const timer = document.getElementById('timer')
 let minutosEmSegundos = 1500
+let minutosDoModo = 1500
 let timerFuncionando = false
 let contagem
 const buttonReset = document.getElementById('button-reset')
@@ -13,6 +14,7 @@ const imgButtonPlay = document.getElementById('img-botao-play')
 const buttonPassarModo = document.getElementById('button-forward')
 const musicaFundo = new Audio('sounds/Transcendence.mp3')
 const somClick = new Audio('sounds/Click.mp3')
+const musicaFimTempo = new Audio('sounds/Ringtone.mp3')
 let musicaTocando = false
 const buttonMusica = document.getElementById('buttonmusica')
 const spanMusica = document.getElementById('spanmusica')
@@ -44,8 +46,11 @@ function começarTimer(tempoQueFalta) {
         minutosEmSegundos --
         atualizarDisplay()
         if (minutosEmSegundos <= 0) {
+            musicaFimTempo.play()
             clearInterval(contagem)
             timerFuncionando = false
+            resetarTimer(minutosDoModo)
+            alert('Tempo esgotado!')
         }
     }, 1000);
 }
@@ -71,13 +76,16 @@ function trocarModo(modo) {
         buttonPausa.classList.add('active-tab')
         timer.textContent = "05:00"
         minutosEmSegundos = 300
+        minutosDoModo = 300
     } else if (modo == 'foco') {
         buttonFoco.classList.add('active-tab')
         minutosEmSegundos = 1500
+        minutosDoModo = 1500
         timer.textContent = "25:00"
     } else {
         buttonDescanso.classList.add('active-tab')
         minutosEmSegundos = 900
+        minutosDoModo = 900
         timer.textContent = "15:00"
     }
     resetarTimer(minutosEmSegundos)
