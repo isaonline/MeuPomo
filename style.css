@@ -317,6 +317,7 @@ aside {
 }
 
 #task-input {
+    padding: 6px;
     margin: 16px 0;
     width: 494px;
     height: 156px;
