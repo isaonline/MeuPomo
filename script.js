@@ -1,4 +1,6 @@
 const STORAGE_KEY = "dadosDeTask"
+const dadosDeTask = localStorage.getItem("dadosDeTask")
+const dadosTaskParse = JSON.parse(dadosDeTask)
 
 const barraMenu = document.getElementById('tab')
 const buttonFoco = document.getElementById('foco')
@@ -157,12 +159,17 @@ function renderizarLocalStorage() {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log(localStorage.getItem(STORAGE_KEY))
-    if (localStorage.length != 0) {
+
+    if (dadosTaskParse.length != 0) {
         renderizarLocalStorage()
         listaDeTasks.classList.remove('hidden')
         listaDeTasks.classList.remove('task-list-vazia')
         illustEmptyState.classList.add('hidden')
+
+        if ((dadosTaskParse.length > 3) && !formTask.classList.contains('hidden')) {
+            listaDeTasks.classList.add('task-list-longa')
+            console.log('teste')
+        }
     }
 })
 
@@ -216,7 +223,7 @@ labelMusica.addEventListener('click', () => {
 })
 
 buttonCancelar.addEventListener('click', () => {
-    if (dadosSalvos == null) {
+    if (dadosTaskParse == 0) {
         illustEmptyState.classList.remove('hidden')
     }
     formTask.classList.add('hidden')
@@ -240,5 +247,18 @@ formTask.addEventListener('submit', (event) => {
         inputTask.textContent = ''
     } else {
         alert('A descrição da task está vazia! Nada foi salvo.')
+    }
+})
+
+
+listaDeTasks.addEventListener('click', () => {
+    const taskClicada = event.target
+    const divTaskClicada = event.target.parentElement
+    const h4TaskClicada = taskClicada.nextElementSibling
+    if (taskClicada.classList.contains('check-task')) {
+        taskClicada.classList.toggle('task-concluida')
+        taskClicada.classList.toggle('texto-crossed')
+        divTaskClicada.classList.toggle('sombra-task')
+        h4TaskClicada.classList.toggle('texto-crossed')
     }
 })

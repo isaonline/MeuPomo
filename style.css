@@ -101,6 +101,10 @@ body {
     line-height: 24px;
 }
 
+.texto-crossed {
+    text-decoration-line: line-through;
+}
+
 /* Estilos do projeto desktop-first */
 
 main {
@@ -304,10 +308,25 @@ aside {
 }
 
 .check-task {
+    display: inline-block; 
     border: 1px solid var(--black);
     width: 35px;
     height: 35px;
     border-radius: 8px;
+    background-color: var(--white);
+}
+
+.sombra-task {
+    box-shadow: -2px 4px 0px 0px var(--black);
+}
+
+.task-concluida {
+    background-image: url(icons/check-fat-fill.svg);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--green);
+    box-shadow: -2px 4px 0px 0px var(--black);
 }
 
 .task > img {
