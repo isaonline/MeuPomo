@@ -284,10 +284,16 @@ aside {
     margin-top: -16px;
 }
 
-.task-list-longa {
+.task-list-tres-itens {
     overflow-x: hidden;
     overflow-y: scroll;
     height: calc(3 * 80px);
+}
+
+.task-list-sete-itens {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: calc(7 * 80px);   
 }
 
 .task {

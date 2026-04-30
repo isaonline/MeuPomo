@@ -30,6 +30,8 @@ const inputTask = document.getElementById('task-input')
 const buttonSalvarTask = document.getElementById('button-salvar')
 const buttonCancelar = document.getElementById('button-cancelar')
 const listaDeTasks = document.getElementById('tasks-list')
+let tasksMenores3 = false
+let tasksMenores7 = false
 
 function removerOutrosModos() {
     htmlBody.classList.remove('modo-foco', 'modo-pausa', 'modo-descanso')
@@ -145,7 +147,9 @@ function renderizarLocalStorage() {
             h4.className = 'texto-text'
             const img = document.createElement('img')
             img.src = 'icons/pencil.svg'
-
+            if (tasksMenores3 || tasksMenores7) {
+                div.classList.add('task-menor')
+            }
             div.appendChild(span)
             div.appendChild(h4)
             div.appendChild(img)
@@ -158,19 +162,39 @@ function renderizarLocalStorage() {
     }
 }
 
-window.addEventListener('DOMContentLoaded', (event) => {
-
+function verificarLocalStorage() {
     if (dadosTaskParse.length != 0) {
-        renderizarLocalStorage()
         listaDeTasks.classList.remove('hidden')
         listaDeTasks.classList.remove('task-list-vazia')
         illustEmptyState.classList.add('hidden')
+        listaDeTasks.classList.remove('task-list-tres-itens')
+        listaDeTasks.classList.remove('task-list-sete-itens')
+        tasksMenores3 = false
+        tasksMenores7 = false
+        renderizarLocalStorage()
 
-        if ((dadosTaskParse.length > 3) && !formTask.classList.contains('hidden')) {
-            listaDeTasks.classList.add('task-list-longa')
-            console.log('teste')
+        if (!formTask.classList.contains('hidden')) {
+                tasksMenores3 = true
+                listaDeTasks.classList.add('task-list-tres-itens')
+                listaDeTasks.classList.remove('task-list-sete-itens')
+        } else if (dadosTaskParse.length > 7) {
+            if (formTask.classList.contains('hidden')) {
+                tasksMenores7 = true
+                listaDeTasks.classList.remove('task-list-tres-itens')
+                listaDeTasks.classList.add('task-list-sete-itens')
+                console.log('teste')
+            } else {
+                tasksMenores3 = true
+                listaDeTasks.classList.add('task-list-tres-itens')
+                listaDeTasks.classList.remove('task-list-sete-itens')
+            }
         }
+        renderizarLocalStorage()
     }
+}
+
+window.addEventListener('DOMContentLoaded', (event) => {
+    verificarLocalStorage()
 })
 
 buttonFoco.addEventListener('click', () => {
@@ -224,15 +248,18 @@ labelMusica.addEventListener('click', () => {
 
 buttonCancelar.addEventListener('click', () => {
     if (dadosTaskParse == 0) {
+        verificarLocalStorage()
         illustEmptyState.classList.remove('hidden')
     }
     formTask.classList.add('hidden')
     inputTask.textContent = ''
+    verificarLocalStorage()
 })
 
 buttonAddTask.addEventListener('click', () => {
     illustEmptyState.classList.add('hidden')
     formTask.classList.remove('hidden')
+    verificarLocalStorage()
 })
 
 formTask.addEventListener('submit', (event) => {
@@ -245,9 +272,11 @@ formTask.addEventListener('submit', (event) => {
         renderizarLocalStorage()
         formTask.classList.add('hidden')
         inputTask.textContent = ''
+        location.reload();
     } else {
         alert('A descrição da task está vazia! Nada foi salvo.')
     }
+    verificarLocalStorage()
 })
 
 
