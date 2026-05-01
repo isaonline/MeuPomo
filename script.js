@@ -17,8 +17,14 @@ const buttonPlay = document.getElementById('button-play')
 const imgButtonPlay = document.getElementById('img-botao-play')
 const buttonPassarModo = document.getElementById('button-forward')
 const musicaFundo = new Audio('sounds/Transcendence.mp3')
+musicaFundo.volume = 0.5
+musicaFundo.loop = true
 const somClick = new Audio('sounds/Click.mp3')
+somClick.volume = 0.5
 const musicaFimTempo = new Audio('sounds/Ringtone.mp3')
+musicaFimTempo.volume = 0.7
+const somTaskFeita = new Audio('sounds/Bling.mp3')
+somTaskFeita.volume = 0.5
 let musicaTocando = false
 const buttonMusica = document.getElementById('buttonmusica')
 const spanMusica = document.getElementById('spanmusica')
@@ -26,12 +32,15 @@ const labelMusica = document.getElementById('label-musica')
 const illustEmptyState = document.getElementById('illust-tasks-vazias')
 const buttonAddTask = document.getElementById('button-adicionar-task')
 const formTask = document.getElementById('task-form')
+const labelInput = document.getElementById('label-input')
 const inputTask = document.getElementById('task-input')
 const buttonSalvarTask = document.getElementById('button-salvar')
 const buttonCancelar = document.getElementById('button-cancelar')
+const buttonExcluir = document.getElementById('button-excluir')
 const listaDeTasks = document.getElementById('tasks-list')
 let tasksMenores3 = false
 let tasksMenores7 = false
+let taskFeita = true
 
 function removerOutrosModos() {
     htmlBody.classList.remove('modo-foco', 'modo-pausa', 'modo-descanso')
@@ -143,7 +152,7 @@ function renderizarLocalStorage() {
             const span = document.createElement('span')
             span.className = 'check-task'
             const h4 = document.createElement('h4')
-            h4.textContent = task
+            h4.textContent = task.descricao
             h4.className = 'texto-text'
             const img = document.createElement('img')
             img.src = 'icons/pencil.svg'
@@ -173,7 +182,7 @@ function verificarLocalStorage() {
         tasksMenores7 = false
         renderizarLocalStorage()
 
-        if (!formTask.classList.contains('hidden')) {
+        if (!formTask.classList.contains('hidden') && dadosTaskParse.length > 3) {
                 tasksMenores3 = true
                 listaDeTasks.classList.add('task-list-tres-itens')
                 listaDeTasks.classList.remove('task-list-sete-itens')
@@ -265,7 +274,10 @@ buttonAddTask.addEventListener('click', () => {
 formTask.addEventListener('submit', (event) => {
     event.preventDefault()
     let tasksExistentes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
-    let novaTask = inputTask.value.trim()
+    let novaTask = {
+        id: crypto.randomUUID(),
+        descricao: inputTask.value.trim()
+    }
     tasksExistentes.push(novaTask)
     if (novaTask.length != 0) {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
@@ -275,19 +287,38 @@ formTask.addEventListener('submit', (event) => {
         location.reload();
     } else {
         alert('A descrição da task está vazia! Nada foi salvo.')
+        formTask.classList.add('hidden')
+        inputTask.textContent = ''
     }
     verificarLocalStorage()
 })
 
 
-listaDeTasks.addEventListener('click', () => {
-    const taskClicada = event.target
-    const divTaskClicada = event.target.parentElement
-    const h4TaskClicada = taskClicada.nextElementSibling
-    if (taskClicada.classList.contains('check-task')) {
-        taskClicada.classList.toggle('task-concluida')
-        taskClicada.classList.toggle('texto-crossed')
-        divTaskClicada.classList.toggle('sombra-task')
-        h4TaskClicada.classList.toggle('texto-crossed')
+listaDeTasks.addEventListener('click', (e) => {
+
+    if (e.target.matches('.check-task')) {
+        const taskClicada = e.target
+        const divTaskClicada = e.target.parentElement
+        const h4TaskClicada = taskClicada.nextElementSibling
+        const imgTaskClicada = divTaskClicada.lastElementChild
+        if (taskClicada.classList.contains('task-concluida')) {
+            taskFeita = false
+            taskClicada.classList.remove('task-concluida')
+            taskClicada.classList.remove('texto-crossed')
+            divTaskClicada.classList.remove('sombra-task')
+            h4TaskClicada.classList.remove('texto-crossed')
+        } else {
+        taskFeita = true
+        taskClicada.classList.add('task-concluida')
+        taskClicada.classList.add('texto-crossed')
+        divTaskClicada.classList.add('sombra-task')
+        h4TaskClicada.classList.add('texto-crossed')
+        somTaskFeita.play()
+        }
+    } else if (e.target.matches('img')) {
+        formTask.classList.toggle('hidden')
+        labelInput.textContent = 'Editar task'
+        buttonExcluir.classList.remove('hidden')
+        inputTask.setAttribute('placeholder', 'Escreva o novo conteúdo da task aqui...')
     }
 })

@@ -287,7 +287,8 @@ aside {
 .task-list-tres-itens {
     overflow-x: hidden;
     overflow-y: scroll;
-    height: calc(3 * 80px);
+    height: calc(auto * 80px);
+    max-height: calc(3 * 80px);
 }
 
 .task-list-sete-itens {
@@ -383,6 +384,7 @@ aside {
 }
 
 #task-input {
+    resize: none;
     padding: 6px;
     margin: 16px 0;
     width: 498px;
