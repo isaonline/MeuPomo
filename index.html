@@ -36,7 +36,7 @@
                     <button onclick="opcoesEditar()"><img class="editar-todas-tasks" src="icons/dots-three-outline-vertical-fill.svg" alt="Editar todas as tasks"></button>
                     <div id="container-dropdown" class="hidden">
                         <button id="dropdown-1" class="opcoes-dropdown" onclick="removerTodas()">Remover todas as tasks</button>
-                        <button id="dropdown-2" class="opcoes-dropdown" onclick="removerConcluidas()">Remover todas as tasks concluídas</button>
+                        <button id="dropdown-2" class="opcoes-dropdown" onclick="removerConcluidas()">Remover tasks concluídas</button>
                     </div>
                     </div>
             </div>
@@ -51,7 +51,7 @@
                 <fieldset>
                     <input type="hidden" id="edit-id">
                     <label for="task-input" class="task-label texto-small" id="label-input">Nova task</label>
-                    <textarea name="task-input" id="task-input" placeholder="Escreva a  task aqui..."></textarea>
+                    <textarea maxlength="40" name="task-input" id="task-input" placeholder="Escreva a  task aqui..."></textarea>
                     <div id="buttons-input"><button id="button-excluir" class="texto-button hidden" type="button">Excluir</button>
                     <button id="button-cancelar" class="texto-button" type="reset">Cancelar</button>
                     <button id="button-salvar" class="texto-button" type="submit">Salvar</button></div>

@@ -244,11 +244,28 @@ function removerTodas() {
 
 function removerConcluidas() {
     let tasksExistentes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+
+    const taskEditadaConcluida = tasksExistentes.find(
+        item => item.id === idEditavelAtual && item.concluida === true
+    )
+
+    if (taskEditadaConcluida) {
+        fecharForm()
+    }
+
     tasksExistentes = tasksExistentes.filter(item => item.concluida === false)
-    
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
+
+    if (tasksExistentes <= 1) {
+        localStorage.removeItem(STORAGE_KEY)
+    }
     opcoesEditar()
     verificarLocalStorage()
+
+    if (idEditavelAtual) {
+        const divEditada = document.getElementById(idEditavelAtual)
+        if (divEditada) divEditada.classList.add('hidden')
+    }
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -312,6 +329,7 @@ buttonCancelar.addEventListener('click', () => {
 })
 
 buttonAddTask.addEventListener('click', () => {
+    fecharForm()
     inputTask.value = ''
     labelInput.textContent = 'Nova task'
     buttonExcluir.classList.add('hidden')
