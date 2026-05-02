@@ -30,7 +30,16 @@
             </div>
         </section>
         <aside id="card-task">
-            <h2 class="texto-subtitle">Minhas tasks</h2>
+            <div id="minhas-tasks">
+                <h2 class="texto-subtitle">Minhas tasks</h2>
+                <div id="dropdown">
+                    <button onclick="opcoesEditar()"><img class="editar-todas-tasks" src="icons/dots-three-outline-vertical-fill.svg" alt="Editar todas as tasks"></button>
+                    <div id="container-dropdown" class="hidden">
+                        <button id="dropdown-1" class="opcoes-dropdown" onclick="removerTodas()">Remover todas as tasks</button>
+                        <button id="dropdown-2" class="opcoes-dropdown" onclick="removerConcluidas()">Remover todas as tasks concluídas</button>
+                    </div>
+                    </div>
+            </div>
             <div id="tasks-list" class="hidden task-list-vazia">
             </div>
             <div id="illust-tasks-vazias">

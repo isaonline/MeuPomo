@@ -27,6 +27,7 @@ let musicaTocando = false
 const buttonMusica = document.getElementById('buttonmusica')
 const spanMusica = document.getElementById('spanmusica')
 const labelMusica = document.getElementById('label-musica')
+const buttonEditarTasks = document.getElementById('editar-todas-tasks')
 const illustEmptyState = document.getElementById('illust-tasks-vazias')
 const buttonAddTask = document.getElementById('button-adicionar-task')
 const formTask = document.getElementById('task-form')
@@ -177,6 +178,15 @@ function renderizarLocalStorage() {
 
 function verificarLocalStorage() {
     const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
+
+    if (!dadosTaskParse) {
+        listaDeTasks.classList.add('hidden')
+        if (formTask.classList.contains('hidden')) {
+            illustEmptyState.classList.remove('hidden')
+        }
+        return
+    }
+
     if (dadosTaskParse.length != 0) {
         listaDeTasks.classList.remove('hidden')
         if (formTask.classList.contains('hidden')) {
@@ -188,21 +198,14 @@ function verificarLocalStorage() {
         tasksMenores3 = false
         tasksMenores7 = false
 
-        if (!formTask.classList.contains('hidden') && dadosTaskParse.length > 3) {
-                tasksMenores3 = true
-                listaDeTasks.classList.add('task-list-tres-itens')
-                listaDeTasks.classList.remove('task-list-sete-itens')
-        } else if (dadosTaskParse.length > 7) {
-            if (formTask.classList.contains('hidden')) {
-                tasksMenores7 = true
-                listaDeTasks.classList.remove('task-list-tres-itens')
-                listaDeTasks.classList.add('task-list-sete-itens')
-            } else {
-                tasksMenores3 = true
-                listaDeTasks.classList.add('task-list-tres-itens')
-                listaDeTasks.classList.remove('task-list-sete-itens')
-            }
+        if (dadosTaskParse.length > 7) {
+            tasksMenores7 = true
+            listaDeTasks.classList.add('task-list-sete-itens')
+        } else if (dadosTaskParse.length > 3 && !formTask.classList.contains('hidden')) {
+            tasksMenores3 = true
+            listaDeTasks.classList.add('task-list-tres-itens')
         }
+        
         renderizarLocalStorage()
     } else if (dadosTaskParse.length == 0 && formTask.classList.contains('hidden')) {
         illustEmptyState.classList.remove('hidden')
@@ -225,6 +228,27 @@ function fecharForm() {
     buttonExcluir.classList.add('hidden')
     inputTask.value = ''
     idEditavelAtual = null
+}
+
+function opcoesEditar() {
+    const container = document.getElementById('container-dropdown')
+
+    container.classList.toggle('hidden')
+}
+
+function removerTodas() {
+    localStorage.removeItem(STORAGE_KEY)
+    opcoesEditar()
+    verificarLocalStorage()
+}
+
+function removerConcluidas() {
+    let tasksExistentes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+    tasksExistentes = tasksExistentes.filter(item => item.concluida === false)
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
+    opcoesEditar()
+    verificarLocalStorage()
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -280,12 +304,9 @@ labelMusica.addEventListener('click', () => {
     tocarMusica()
 })
 
+
+
 buttonCancelar.addEventListener('click', () => {
-    const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
-    if (dadosTaskParse.length == 0) {
-        verificarLocalStorage()
-        illustEmptyState.classList.remove('hidden')
-    }
     fecharForm()
     verificarLocalStorage()
 })
@@ -375,7 +396,17 @@ listaDeTasks.addEventListener('click', (e) => {
         const idTask = divTask.id
 
         fecharForm()
-        divTask.classList.add('hidden')
+
+        if (tasksExistentes.length > 3) {
+            tasksMenores3 = true
+            listaDeTasks.classList.add('task-list-tres-itens')
+            listaDeTasks.classList.remove('task-list-sete-itens')
+        }
+
+        renderizarLocalStorage()
+
+        const divRecriada = document.getElementById(idTask)
+        divRecriada.classList.add('hidden')
 
         const tasksVisiveis = listaDeTasks.querySelectorAll('.task:not(.hidden)')
         if (tasksVisiveis.length === 0) {
@@ -389,6 +420,7 @@ listaDeTasks.addEventListener('click', (e) => {
         buttonExcluir.classList.remove('hidden')
         inputTask.setAttribute('placeholder', 'Escreva o novo conteúdo da task aqui...')
         editarTask(idTask)
+
     }
 })
 
