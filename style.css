@@ -280,7 +280,7 @@ aside {
     gap: 15px;
 }
 
-.task-list-vazia {
+#tasks-list.task-list-vazia {
     margin-top: -16px;
 }
 

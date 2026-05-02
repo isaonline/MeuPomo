@@ -177,9 +177,11 @@ function renderizarLocalStorage() {
 
 function verificarLocalStorage() {
     const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
-    if (dadosTaskParse) {
+    if (dadosTaskParse.length != 0) {
         listaDeTasks.classList.remove('hidden')
-        listaDeTasks.classList.remove('task-list-vazia')
+        if (formTask.classList.contains('hidden')) {
+            listaDeTasks.classList.remove('task-list-vazia')
+        }
         illustEmptyState.classList.add('hidden')
         listaDeTasks.classList.remove('task-list-tres-itens')
         listaDeTasks.classList.remove('task-list-sete-itens')
@@ -202,6 +204,8 @@ function verificarLocalStorage() {
             }
         }
         renderizarLocalStorage()
+    } else if (dadosTaskParse.length == 0 && formTask.classList.contains('hidden')) {
+        illustEmptyState.classList.remove('hidden')
     }
 }
 
@@ -210,6 +214,17 @@ function editarTask(id) {
     const itemAEditar = dadosTaskParse.find(item => item.id === id)
     inputTask.value = itemAEditar.descricao
     idEditavelAtual = id
+}
+
+function fecharForm() {
+    if (idEditavelAtual) {
+        const divEscondida = document.getElementById(idEditavelAtual)
+        if (divEscondida) divEscondida.classList.remove('hidden')
+    }
+    formTask.classList.add('hidden')
+    buttonExcluir.classList.add('hidden')
+    inputTask.value = ''
+    idEditavelAtual = null
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -267,16 +282,18 @@ labelMusica.addEventListener('click', () => {
 
 buttonCancelar.addEventListener('click', () => {
     const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
-    if (dadosTaskParse.length === 0) {
+    if (dadosTaskParse.length == 0) {
         verificarLocalStorage()
         illustEmptyState.classList.remove('hidden')
     }
-    formTask.classList.add('hidden')
-    inputTask.value = ''
+    fecharForm()
     verificarLocalStorage()
 })
 
 buttonAddTask.addEventListener('click', () => {
+    labelInput.textContent = 'Nova task'
+    buttonExcluir.classList.add('hidden')
+    inputTask.setAttribute('placeholder', 'Escreva a  task aqui...')
     illustEmptyState.classList.add('hidden')
     formTask.classList.remove('hidden')
     verificarLocalStorage()
@@ -290,7 +307,7 @@ formTask.addEventListener('submit', (event) => {
     if (idEditavelAtual != null) {
         if (dadoDigitado.length == 0) {
             alert('A descrição da task está vazia! Nada foi salvo.')
-            formTask.classList.add('hidden')
+            fecharForm()
             inputTask.value = ''
             return
         }
@@ -308,14 +325,14 @@ formTask.addEventListener('submit', (event) => {
 
         if (novaTask.descricao.length == 0) {
             alert('A descrição da task está vazia! Nada foi salvo.')
-            formTask.classList.add('hidden')
+            fecharForm()
             inputTask.value = ''
             return
         }
         tasksExistentes.push(novaTask)
     }
 
-    formTask.classList.add('hidden')
+    fecharForm()
     inputTask.value = ''
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
     renderizarLocalStorage()
@@ -352,10 +369,21 @@ listaDeTasks.addEventListener('click', (e) => {
         )
         localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
     } else if (e.target.matches('img')) {
+        let tasksExistentes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
         const divTask = e.target.closest('.task')
         const idTask = divTask.id
 
-        formTask.classList.toggle('hidden')
+        fecharForm()
+        divTask.classList.add('hidden')
+
+        const tasksVisiveis = listaDeTasks.querySelectorAll('.task:not(.hidden)')
+        if (tasksVisiveis.length === 0) {
+            listaDeTasks.classList.add('task-list-vazia')
+        } else {
+            listaDeTasks.classList.remove('task-list-vazia')
+        }
+
+        formTask.classList.remove('hidden')
         labelInput.textContent = 'Editar task'
         buttonExcluir.classList.remove('hidden')
         inputTask.setAttribute('placeholder', 'Escreva o novo conteúdo da task aqui...')
@@ -369,7 +397,7 @@ buttonExcluir.addEventListener('click', () => {
     
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
     idEditavelAtual = null
-    formTask.classList.add('hidden')
+    fecharForm()
     buttonExcluir.classList.add('hidden')
     renderizarLocalStorage()
     verificarLocalStorage()
