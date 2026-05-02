@@ -1,6 +1,4 @@
 const STORAGE_KEY = "dadosDeTask"
-const dadosDeTask = localStorage.getItem("dadosDeTask")
-const dadosTaskParse = JSON.parse(dadosDeTask)
 let idEditavelAtual = null
 const barraMenu = document.getElementById('tab')
 const buttonFoco = document.getElementById('foco')
@@ -95,12 +93,12 @@ function trocarModo(modo) {
     somClick.play()
     removerOutrosModos()
     htmlBody.classList.add(`modo-${modo}`)
-    if (modo == 'pausa') {
+    if (modo === 'pausa') {
         buttonPausa.classList.add('active-tab')
         timer.textContent = "05:00"
         minutosEmSegundos = 300
         minutosDoModo = 300
-    } else if (modo == 'foco') {
+    } else if (modo === 'foco') {
         buttonFoco.classList.add('active-tab')
         minutosEmSegundos = 1500
         minutosDoModo = 1500
@@ -155,6 +153,11 @@ function renderizarLocalStorage() {
             const h4 = document.createElement('h4')
             h4.textContent = task.descricao
             h4.className = 'texto-text'
+            if (task.concluida) {
+                span.classList.add('task-concluida')
+                h4.classList.add('texto-crossed')
+                div.classList.add('sombra-task')
+            }
             const img = document.createElement('img')
             img.src = 'icons/pencil.svg'
             if (tasksMenores3 || tasksMenores7) {
@@ -173,6 +176,7 @@ function renderizarLocalStorage() {
 }
 
 function verificarLocalStorage() {
+    const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
     if (dadosTaskParse) {
         listaDeTasks.classList.remove('hidden')
         listaDeTasks.classList.remove('task-list-vazia')
@@ -181,7 +185,6 @@ function verificarLocalStorage() {
         listaDeTasks.classList.remove('task-list-sete-itens')
         tasksMenores3 = false
         tasksMenores7 = false
-        renderizarLocalStorage()
 
         if (!formTask.classList.contains('hidden') && dadosTaskParse.length > 3) {
                 tasksMenores3 = true
@@ -192,7 +195,6 @@ function verificarLocalStorage() {
                 tasksMenores7 = true
                 listaDeTasks.classList.remove('task-list-tres-itens')
                 listaDeTasks.classList.add('task-list-sete-itens')
-                console.log('teste')
             } else {
                 tasksMenores3 = true
                 listaDeTasks.classList.add('task-list-tres-itens')
@@ -204,6 +206,7 @@ function verificarLocalStorage() {
 }
 
 function editarTask(id) {
+    const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
     const itemAEditar = dadosTaskParse.find(item => item.id === id)
     inputTask.value = itemAEditar.descricao
     idEditavelAtual = id
@@ -263,12 +266,13 @@ labelMusica.addEventListener('click', () => {
 })
 
 buttonCancelar.addEventListener('click', () => {
-    if (dadosTaskParse == 0) {
+    const dadosTaskParse = JSON.parse(localStorage.getItem("dadosDeTask"))
+    if (dadosTaskParse.length === 0) {
         verificarLocalStorage()
         illustEmptyState.classList.remove('hidden')
     }
     formTask.classList.add('hidden')
-    inputTask.textContent = ''
+    inputTask.value = ''
     verificarLocalStorage()
 })
 
@@ -284,6 +288,13 @@ formTask.addEventListener('submit', (event) => {
     const dadoDigitado = inputTask.value.trim()
 
     if (idEditavelAtual != null) {
+        if (dadoDigitado.length == 0) {
+            alert('A descrição da task está vazia! Nada foi salvo.')
+            formTask.classList.add('hidden')
+            inputTask.value = ''
+            return
+        }
+
         tasksExistentes = tasksExistentes.map(item =>
             item.id === idEditavelAtual ? {...item, descricao: dadoDigitado } : item
         )
@@ -291,7 +302,8 @@ formTask.addEventListener('submit', (event) => {
     } else {
         let novaTask = {
             id: crypto.randomUUID(),
-            descricao: inputTask.value.trim()
+            descricao: inputTask.value.trim(),
+            concluida: false
         }
 
         if (novaTask.descricao.length == 0) {
@@ -304,10 +316,9 @@ formTask.addEventListener('submit', (event) => {
     }
 
     formTask.classList.add('hidden')
-    inputTask.textContent = ''
+    inputTask.value = ''
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
     renderizarLocalStorage()
-    location.reload();
     verificarLocalStorage()
 })
 
@@ -333,6 +344,13 @@ listaDeTasks.addEventListener('click', (e) => {
         h4TaskClicada.classList.add('texto-crossed')
         somTaskFeita.play()
         }
+        const idDaTask = divTaskClicada.id
+
+        let tasksExistentes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+        tasksExistentes = tasksExistentes.map(item =>
+            item.id === idDaTask ? { ...item, concluida: !item.concluida } : item
+        )
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
     } else if (e.target.matches('img')) {
         const divTask = e.target.closest('.task')
         const idTask = divTask.id
@@ -343,4 +361,16 @@ listaDeTasks.addEventListener('click', (e) => {
         inputTask.setAttribute('placeholder', 'Escreva o novo conteúdo da task aqui...')
         editarTask(idTask)
     }
+})
+
+buttonExcluir.addEventListener('click', () => {
+    let tasksExistentes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || []
+    tasksExistentes = tasksExistentes.filter(item => item.id !== idEditavelAtual)
+    
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
+    idEditavelAtual = null
+    formTask.classList.add('hidden')
+    buttonExcluir.classList.add('hidden')
+    renderizarLocalStorage()
+    verificarLocalStorage()
 })
