@@ -291,6 +291,7 @@ buttonCancelar.addEventListener('click', () => {
 })
 
 buttonAddTask.addEventListener('click', () => {
+    inputTask.value = ''
     labelInput.textContent = 'Nova task'
     buttonExcluir.classList.add('hidden')
     inputTask.setAttribute('placeholder', 'Escreva a  task aqui...')
