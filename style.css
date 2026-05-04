@@ -71,6 +71,10 @@ body {
     background-color: var(--background);
 }
 
+button {
+    outline: none;
+}
+
 /* Text styles */
 .texto-timer {
     font-weight: 700;
@@ -482,6 +486,10 @@ aside {
     text-align: center;
 }
 
+#illust-tasks-vazias > p {
+    width: 100%;
+}
+
 /* Form de nova task / edit task */
 
 #task-form > fieldset {
@@ -651,6 +659,10 @@ footer {
 
     aside {
         width: 400px;
+    }
+
+    .texto-text {
+        overflow-wrap: break-word;
     }
 
     .texto-timer {
