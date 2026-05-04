@@ -639,17 +639,32 @@ footer {
 }
 
 @media screen and (max-width: 600px) {
-    aside {
-        width: 450px;
-        max-height: 740px;
-        padding: 24px;
-        box-shadow: -2px 4px 0px 0px var(--black);
+
+    #logo, #logo > strong {
+        font-size: 40px;
     }
 
-    #tasks-list {
-        width: 100%;
-        display: flex;
-        flex-flow: column nowrap;
-        gap: 15px;
+    nav > button {
+        width: 140px;
+        height: 44px;
+    }
+
+    aside {
+        width: 400px;
+    }
+
+    .texto-timer {
+        font-size: 100px;
+    }
+
+    .texto-subtitle {
+        font-size: 18px;
+    }
+
+    .texto-text {
+        width: 180px;
+        overflow-wrap: break-word;
+        font-size: 12px;
+        line-height: 120%;
     }
 }
