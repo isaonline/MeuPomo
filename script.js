@@ -209,6 +209,8 @@ function verificarLocalStorage() {
         
         renderizarLocalStorage()
     } else if (dadosTaskParse.length == 0 && formTask.classList.contains('hidden')) {
+        listaDeTasks.classList.add('hidden')
+        listaDeTasks.innerHTML = ''
         illustEmptyState.classList.remove('hidden')
     }
 }
@@ -238,10 +240,10 @@ function opcoesEditar() {
 }
 
 function removerTodas() {
+    fecharForm()
     localStorage.removeItem(STORAGE_KEY)
     opcoesEditar()
     verificarLocalStorage()
-    fecharForm()
     illustEmptyState.classList.remove('hidden')
 }
 
@@ -259,9 +261,6 @@ function removerConcluidas() {
     tasksExistentes = tasksExistentes.filter(item => item.concluida === false)
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasksExistentes))
 
-    if (tasksExistentes <= 1) {
-        localStorage.removeItem(STORAGE_KEY)
-    }
     opcoesEditar()
     verificarLocalStorage()
 
