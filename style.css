@@ -54,6 +54,7 @@
     color: var(--black);
     font-family: 'Clash Display', sans-serif;
     letter-spacing: 0%;
+    transition: all 0.3s ease-in-out;
 }
 
 html, body, main {
@@ -156,6 +157,11 @@ nav > button {
     border: none;
 }
 
+nav > button:hover {
+    background-color: var(--hover);
+    cursor: pointer;
+}
+
 #foco {
     border-right: 3px solid var(--black);
     border-top-left-radius: 40px;
@@ -171,7 +177,7 @@ nav > button {
 /* Modos ativos de cada tab */
 
 .active-tab {
-    background-color: var(--primary);
+    background-color: var(--primary) !important;
 }
 
 /* Botões de Ação do Timer */
@@ -190,9 +196,14 @@ nav > button {
     height: 80;
     border-radius: 16px;
     background-color: var(--surface);
-    border: 2px solid var(--black, #2C2C2C);
+    border: 2px solid var(--black);
     box-shadow: -2px 4px 0px 0px var(--black);
     padding: 24px;
+}
+
+#button-reset:hover, #button-forward:hover {
+    background-color: rgb(from var(--surface) r g b / 0.6);
+    cursor: pointer;
 }
 
 #button-play {
@@ -203,6 +214,11 @@ nav > button {
     background-color: var(--primary);
     border: 2px solid var(--black, #2C2C2C);
     box-shadow: -2px 4px 0px 0px var(--black);
+}
+
+#button-play:hover {
+    background-color: rgb(from var(--primary) r g b / 0.6);
+    cursor: pointer;
 }
 
 div > button > img {
@@ -238,6 +254,11 @@ div > button > img {
     transform: translate(0, 5px);
 }
 
+.button-musica:hover {
+    background-color: var(--hover);
+    cursor: pointer;
+}
+
 .span-musica {
     width: 20px;
     height: 20px;
@@ -250,11 +271,17 @@ div > button > img {
 /* Botão de música ativo */
 
 .button-musica-active {
-    background: var(--primary);    
+    background-color: var(--primary);    
+}
+
+.button-musica-active:hover {
+    background-color: rgb(from var(--primary) r g b / 0.6);
 }
 
 .span-active {
-    transform: translate(-0px, -10px);    
+    transform: translate(-0px, -10px);
+    border: 1px solid var(--black);
+    background-color: var(--background);
 }
 
 /* Card de tasks */
@@ -307,6 +334,12 @@ aside {
     height: 25px;
 }
 
+.editar-todas-tasks:hover {
+    background-color: rgb(from var(--primary) r g b / 0.4);
+    cursor: pointer;
+    border-radius: 8px;
+}
+
 .opcoes-dropdown {
     background-color: transparent;
     border: none;
@@ -318,6 +351,18 @@ aside {
 
 .opcoes-dropdown:first-child {
     border-bottom: 1px solid var(--black);
+}
+
+#dropdown-1:hover, #dropdown-2:hover {
+    background-color: var(--hover);
+}
+
+#dropdown-1:hover {
+    border-radius: 8px 8px 0 0;
+}
+
+#dropdown-2:hover {
+    border-radius: 0 0 8px 8px;
 }
 
 #tasks-list {
@@ -375,6 +420,11 @@ aside {
     background-color: var(--white);
 }
 
+.check-task:hover {
+    background-color: var(--hover);
+    cursor: pointer;
+}
+
 .sombra-task {
     box-shadow: -2px 4px 0px 0px var(--black);
 }
@@ -386,6 +436,10 @@ aside {
     background-position: center;
     background-color: var(--green);
     box-shadow: -2px 4px 0px 0px var(--black);
+}
+
+.task-concluida:hover {
+    background-color: rgb(from var(--green) r g b / 0.8);
 }
 
 .task > img {
@@ -461,6 +515,11 @@ aside {
     box-shadow: 2px 1px 0px 0px var(--black);
 }
 
+#button-excluir:hover {
+    background-color: rgb(from var(--danger) r g b / 0.8);
+    cursor: pointer;
+}
+
 #button-cancelar {
     width: 101px;
     height: 44px;
@@ -470,12 +529,22 @@ aside {
     box-shadow: 2px 1px 0px 0px var(--black);
 }
 
+#button-cancelar:hover {
+    background-color: var(--hover);
+    cursor: pointer;
+}
+
 #button-salvar {
     width: 90px;
     height: 44px;
     border-radius: 8px; 
     background-color: var(--primary);
     box-shadow: 2px 1px 0px 0px var(--black);
+}
+
+#button-salvar:hover {
+    background-color: rgb(from var(--primary) r g b / 0.6);
+    cursor: pointer;
 }
 
 /* Botão de adicionar task */
@@ -493,6 +562,11 @@ aside {
     background-color: transparent;
 }
 
+#button-adicionar-task:hover {
+    background-color: rgb(from var(--primary) r g b / 0.4);
+    cursor: pointer;
+}
+
 #button-adicionar-task > span {
     display: flex;
     align-items: center;
@@ -507,6 +581,11 @@ aside {
 
 #button-adicionar-task > span > img {
     width: 22px;
+}
+
+.lapis:hover {
+    background-color: var(--hover);
+    cursor: pointer;
 }
 
 .hidden {

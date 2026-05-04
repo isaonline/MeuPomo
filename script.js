@@ -161,6 +161,7 @@ function renderizarLocalStorage() {
             }
             const img = document.createElement('img')
             img.src = 'icons/pencil.svg'
+            img.className = 'lapis'
             if (tasksMenores3 || tasksMenores7) {
                 div.classList.add('task-menor')
             }
