@@ -688,4 +688,20 @@ footer {
     .texto-subtitle {
         font-size: 18px;
     }
+
+    #buttons-input {
+        gap: 8px;
+    }
+
+    #button-excluir {
+        width: 35%;
+    }
+
+    #button-cancelar {
+        width: 35%;
+    }
+
+    #button-salvar {
+        width: 35%;
+    }
 }
