@@ -645,16 +645,17 @@ footer {
     fill: #0A66C2;
 }
 
-@media screen and (max-width: 1180px) {
+@media screen and (max-width: 1400px), screen and (max-height: 900px) {
     main {
-        flex-flow: column nowrap;
-        margin: 16px 0;
+        margin: 80px 0;
+        gap: 40px;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1100px), screen and (max-height: 600px) {
 
     main {
+        flex-flow: column nowrap;
         margin: 32px 0;
         gap: 40px;
     }
@@ -669,7 +670,7 @@ footer {
     }
 
     aside {
-        width: 400px;
+        width: 380px;
     }
 
     .texto-text {
