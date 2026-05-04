@@ -57,6 +57,11 @@
     transition: all 0.3s ease-in-out;
 }
 
+*:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 html, body, main {
     height: 100%;
 }
@@ -436,6 +441,7 @@ aside {
     background-position: center;
     background-color: var(--green);
     box-shadow: -2px 4px 0px 0px var(--black);
+    transition: 0.1s ease-in-out;
 }
 
 .task-concluida:hover {
@@ -498,6 +504,12 @@ aside {
     border-radius: 8px;
     border: 2px solid var(--black);
     box-shadow: -2px 4px 0px 0px var(--black);
+}
+
+#task-input::placeholder {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
 }
 
 #buttons-input {

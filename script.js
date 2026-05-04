@@ -241,6 +241,8 @@ function removerTodas() {
     localStorage.removeItem(STORAGE_KEY)
     opcoesEditar()
     verificarLocalStorage()
+    fecharForm()
+    illustEmptyState.classList.remove('hidden')
 }
 
 function removerConcluidas() {
@@ -334,10 +336,11 @@ buttonAddTask.addEventListener('click', () => {
     inputTask.value = ''
     labelInput.textContent = 'Nova task'
     buttonExcluir.classList.add('hidden')
-    inputTask.setAttribute('placeholder', 'Escreva a  task aqui...')
+    inputTask.setAttribute('placeholder', 'Qual é a nossa task? (Máx. 35 caracteres)')
     illustEmptyState.classList.add('hidden')
     formTask.classList.remove('hidden')
     verificarLocalStorage()
+    inputTask.focus()
 })
 
 formTask.addEventListener('submit', (event) => {
@@ -349,6 +352,7 @@ formTask.addEventListener('submit', (event) => {
         if (dadoDigitado.length == 0) {
             alert('A descrição da task está vazia! Nada foi salvo.')
             fecharForm()
+            verificarLocalStorage()
             inputTask.value = ''
             return
         }
@@ -367,6 +371,7 @@ formTask.addEventListener('submit', (event) => {
         if (novaTask.descricao.length == 0) {
             alert('A descrição da task está vazia! Nada foi salvo.')
             fecharForm()
+            verificarLocalStorage()
             inputTask.value = ''
             return
         }
@@ -437,9 +442,9 @@ listaDeTasks.addEventListener('click', (e) => {
         formTask.classList.remove('hidden')
         labelInput.textContent = 'Editar task'
         buttonExcluir.classList.remove('hidden')
-        inputTask.setAttribute('placeholder', 'Escreva o novo conteúdo da task aqui...')
+        inputTask.setAttribute('placeholder', 'Escreva o novo conteúdo da task aqui... (Máx. 35 caracteres)')
         editarTask(idTask)
-
+        inputTask.focus()
     }
 })
 
