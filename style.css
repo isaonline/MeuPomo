@@ -119,7 +119,7 @@ button {
 /* Estilos do projeto desktop-first */
 
 main {
-    padding: 56px 0;
+    margin: 140px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -648,12 +648,17 @@ footer {
 
 @media screen and (max-width: 600px) {
 
+    main {
+        margin: 32px 0;
+        gap: 40px;
+    }
+
     #logo, #logo > strong {
         font-size: 40px;
     }
 
     nav > button {
-        width: 140px;
+        width: 120px;
         height: 44px;
     }
 
