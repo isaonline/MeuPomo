@@ -624,16 +624,21 @@ footer {
     padding: 16px;
 }
 
+#texto-footer {
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .svg-logos {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    width: 20px;
+    width: 30px;
 }
 
 #github-logo:hover {
-    fill: #24292e;
+    fill: var(--primary);
 }
 
 #linkedin-logo:hover {
@@ -680,6 +685,6 @@ footer {
     }
 
     .texto-subtitle {
-        font-size: 20px;
+        font-size: 18px;
     }
 }
