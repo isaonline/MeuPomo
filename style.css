@@ -247,11 +247,13 @@ div > button > img {
 }
 
 #div-musica > img {
-    height: 32px;
+    height: 28px;
 }
 
-.label-button-musica {
-    transform: translate(0, -2px);    
+#label-musica {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-musica {
@@ -262,7 +264,6 @@ div > button > img {
     border: 1px solid var(--black);
     background: var(--white);
     box-shadow: 2px 1px 0px 0px var(--black);
-    transform: translate(0, 5px);
 }
 
 .button-musica:hover {
@@ -668,6 +669,10 @@ footer {
 
     .texto-text {
         overflow-wrap: break-word;
+        width: 180px;
+        overflow-wrap: break-word;
+        font-size: 14px;
+        line-height: 120%;
     }
 
     .texto-timer {
@@ -675,13 +680,6 @@ footer {
     }
 
     .texto-subtitle {
-        font-size: 18px;
-    }
-
-    .texto-text {
-        width: 180px;
-        overflow-wrap: break-word;
-        font-size: 12px;
-        line-height: 120%;
+        font-size: 20px;
     }
 }
